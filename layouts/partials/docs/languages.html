@@ -1,0 +1,38 @@
+{{ if hugo.IsMultilingual }}
+<div class="book-languages">
+  {{/* Always use visible links for better Safari compatibility */}}
+  <div class="book-languages-links">
+    {{ $currentLang := .Site.Language.Lang }}
+    {{ range .Site.Languages }}
+      {{ $lang := . }}
+      {{ $current := eq $lang.Lang $currentLang }}
+      {{ if $current }}
+        <span class="active" title="Current language">{{ $lang.LanguageName | default ($lang.Lang | upper) }}</span>
+      {{ else }}
+        {{ $targetPage := "" }}
+        {{ if eq $.Kind "home" }}
+          {{ $targetPage = site.GetPage (printf "/%s" $lang.Lang) }}
+        {{ else }}
+          {{ range $.AllTranslations }}
+            {{ if eq .Lang $lang.Lang }}
+              {{ $targetPage = . }}
+            {{ end }}
+          {{ end }}
+          {{ if not $targetPage }}
+            {{ $targetPage = site.GetPage (printf "/%s" $lang.Lang) }}
+          {{ end }}
+        {{ end }}
+        {{ if $targetPage }}
+          <a href="{{ $targetPage.RelPermalink }}" title="Switch to {{ $lang.LanguageName }}">
+            {{ $lang.LanguageName | default ($lang.Lang | upper) }}
+          </a>
+        {{ else }}
+          <a href="/{{ $lang.Lang }}/" title="Switch to {{ $lang.LanguageName }}">
+            {{ $lang.LanguageName | default ($lang.Lang | upper) }}
+          </a>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,30 @@
+baseURL = 'https://work-and-good-customs.oscarvarto.mx/'
+defaultContentLanguage = 'en'
+theme = 'hugo-book'
+
+[params]
+  BookTheme = 'auto'
+  BookMenuBundle = '/menu'
+  BookSection = 'posts'
+
+[languages]
+  [languages.en]
+    languageCode = 'en'
+    languageName = 'English'
+    title = 'Work and Good Customs'
+    weight = 1
+    [languages.en.params]
+      description = 'Blog about social, political, economic and technology topics'
+
+  [languages.es]
+    languageCode = 'es'
+    languageName = 'Español'
+    title = 'Trabajo y buenas costumbres'
+    weight = 2
+    [languages.es.params]
+      description = 'Blog sobre temas sociales, políticos, económicos y tecnológicos'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

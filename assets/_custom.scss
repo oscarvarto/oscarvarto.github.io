@@ -1,0 +1,92 @@
+// Custom styles for language selector
+.book-languages {
+  select {
+    appearance: none;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    border-radius: 3px;
+    padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    color: var(--body-font-color);
+    cursor: pointer;
+
+    // Custom dropdown arrow
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+
+    &:hover {
+      background-color: var(--gray-200);
+      border-color: var(--gray-400);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-link);
+      outline-offset: 2px;
+    }
+  }
+
+  // Ensure the select element is visible
+  position: relative;
+  z-index: 10;
+
+  // Make sure options are visible
+  option {
+    background: var(--body-background);
+    color: var(--body-font-color);
+    padding: 0.25rem;
+  }
+}
+
+// Alternative: Create visible language links if select doesn't work
+.book-languages-links {
+  display: flex;
+  gap: 0.5rem;
+
+  a {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    color: var(--body-font-color);
+    background: var(--gray-100);
+
+    &:hover {
+      background: var(--gray-200);
+      border-color: var(--gray-400);
+    }
+
+    &.active {
+      background: var(--color-link);
+      color: white;
+      border-color: var(--color-link);
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .book-languages select {
+    background: var(--gray-800);
+    border-color: var(--gray-600);
+    color: var(--body-font-color);
+
+    &:hover {
+      background: var(--gray-700);
+      border-color: var(--gray-500);
+    }
+  }
+
+  .book-languages-links a {
+    background: var(--gray-800);
+    border-color: var(--gray-600);
+    color: var(--body-font-color);
+
+    &:hover {
+      background: var(--gray-700);
+      border-color: var(--gray-500);
+    }
+  }
+}
