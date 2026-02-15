@@ -1,1 +1,103 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on Work and Good Customs</title><link>https://work-and-good-customs.oscarvarto.mx/tags/</link><description>Recent content in Tags on Work and Good Customs</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 06 Oct 2025 11:45:00 -0600</lastBuildDate><atom:link href="https://work-and-good-customs.oscarvarto.mx/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>History</title><link>https://work-and-good-customs.oscarvarto.mx/tags/history/</link><pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate><guid>https://work-and-good-customs.oscarvarto.mx/tags/history/</guid><description/></item><item><title>Independence</title><link>https://work-and-good-customs.oscarvarto.mx/tags/independence/</link><pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate><guid>https://work-and-good-customs.oscarvarto.mx/tags/independence/</guid><description/></item><item><title>Mexico</title><link>https://work-and-good-customs.oscarvarto.mx/tags/mexico/</link><pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate><guid>https://work-and-good-customs.oscarvarto.mx/tags/mexico/</guid><description/></item><item><title>Politics</title><link>https://work-and-good-customs.oscarvarto.mx/tags/politics/</link><pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate><guid>https://work-and-good-customs.oscarvarto.mx/tags/politics/</guid><description/></item><item><title>Economics</title><link>https://work-and-good-customs.oscarvarto.mx/tags/economics/</link><pubDate>Sun, 05 Oct 2025 00:00:00 -0600</pubDate><guid>https://work-and-good-customs.oscarvarto.mx/tags/economics/</guid><description/></item><item><title>Sovereignty</title><link>https://work-and-good-customs.oscarvarto.mx/tags/sovereignty/</link><pubDate>Sun, 05 Oct 2025 00:00:00 -0600</pubDate><guid>https://work-and-good-customs.oscarvarto.mx/tags/sovereignty/</guid><description/></item><item><title>Technology</title><link>https://work-and-good-customs.oscarvarto.mx/tags/technology/</link><pubDate>Sun, 05 Oct 2025 00:00:00 -0600</pubDate><guid>https://work-and-good-customs.oscarvarto.mx/tags/technology/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Work and Good Customs</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Work and Good Customs</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 15 Feb 2026 00:00:00 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Adaptability</title>
+      <link>http://localhost:1313/tags/adaptability/</link>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/adaptability/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI</title>
+      <link>http://localhost:1313/tags/ai/</link>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Assessment</title>
+      <link>http://localhost:1313/tags/assessment/</link>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/assessment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Engineering</title>
+      <link>http://localhost:1313/tags/engineering/</link>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hiring</title>
+      <link>http://localhost:1313/tags/hiring/</link>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/hiring/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Interviews</title>
+      <link>http://localhost:1313/tags/interviews/</link>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/interviews/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Technology</title>
+      <link>http://localhost:1313/tags/technology/</link>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/technology/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>History</title>
+      <link>http://localhost:1313/tags/history/</link>
+      <pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/history/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Independence</title>
+      <link>http://localhost:1313/tags/independence/</link>
+      <pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/independence/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mexico</title>
+      <link>http://localhost:1313/tags/mexico/</link>
+      <pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/mexico/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Politics</title>
+      <link>http://localhost:1313/tags/politics/</link>
+      <pubDate>Mon, 06 Oct 2025 11:45:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/politics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Economics</title>
+      <link>http://localhost:1313/tags/economics/</link>
+      <pubDate>Sun, 05 Oct 2025 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/economics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sovereignty</title>
+      <link>http://localhost:1313/tags/sovereignty/</link>
+      <pubDate>Sun, 05 Oct 2025 00:00:00 -0600</pubDate>
+      <guid>http://localhost:1313/tags/sovereignty/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

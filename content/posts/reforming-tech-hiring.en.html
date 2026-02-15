@@ -1,0 +1,1282 @@
++++
+title = 'Reforming Tech Hiring: Aligning Assessment with Real-World Software Development'
+date = 2026-02-15T00:00:00-06:00
+draft = false
+layout = 'raw'
+tags = ['hiring', 'technology', 'assessment', 'interviews', 'engineering']
+categories = ['technology']
+
+[params]
+  rawJS = ['https://cdn.tailwindcss.com', 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js']
+  rawFonts = ['https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap']
+  rawCSS = ['https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css']
+  rawBaseTarget = '_blank'
+  bodyClass = 'bg-gray-50'
++++
+
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #f8f9fa;
+            --accent: #d97706;
+            --text: #374151;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .toc-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid var(--border);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            max-width: 800px;
+            padding: 0 3rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), #374151);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(45deg, #fef3c7, #fed7aa);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .section-header {
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .citation {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--accent);
+        }
+
+        .citation:hover {
+            background-color: #fef3c7;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            margin-left: -1rem;
+            transition: all 0.2s ease;
+        }
+
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+            background: #fef3c7;
+            padding-left: 1rem;
+            margin-left: -1rem;
+        }
+
+        .toc-level-2 {
+            margin-left: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .toc-level-3 {
+            margin-left: 2rem;
+            font-size: 0.8rem;
+        }
+
+        .pull-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--accent);
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-top: 2px solid var(--border);
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* Mermaid diagram styles */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced mermaid theme overrides for better contrast */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke-width: 2px;
+        }
+
+        .mermaid .edgePath .path {
+            stroke-width: 2px;
+        }
+
+        .mermaid .edgeLabel {
+            background-color: white !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 4px !important;
+            padding: 4px 8px !important;
+        }
+
+        /* Node text contrast improvements */
+        .mermaid .nodeLabel {
+            color: #374151 !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+        }
+
+        /* Specific node styling for better contrast */
+        .mermaid .node[style*="fill:#fef3c7"] .nodeLabel,
+        .mermaid .node[style*="fill:#fed7aa"] .nodeLabel {
+            color: #92400e !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#dcfdf4"] .nodeLabel {
+            color: #064e3b !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#dbeafe"] .nodeLabel {
+            color: #1e40af !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#f0f9ff"] .nodeLabel {
+            color: #0c4a6e !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#f0fdf4"] .nodeLabel {
+            color: #14532d !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#f8fafc"] .nodeLabel {
+            color: #1e293b !important;
+            font-weight: 600 !important;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .toc-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 0 1.5rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .main-content {
+                padding: 0 1rem;
+            }
+
+            .hero-section {
+                padding: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1.8rem, 4vw, 2.5rem);
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .subsection-title {
+                font-size: 1.4rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .highlight-box {
+                padding: 1rem;
+            }
+
+            .pull-quote {
+                font-size: 1.2rem;
+                padding: 1.5rem;
+            }
+
+            .mermaid-container {
+                padding: 15px;
+            }
+        }
+    </style>
+
+    <!-- Table of Contents Sidebar -->
+    <nav class="toc-sidebar">
+      <div class="mb-6">
+        <h3 class="serif font-bold text-lg mb-4">Table of Contents</h3>
+      </div>
+
+      <div class="space-y-1">
+        <a href="#problem" class="toc-link">The Core Problem</a>
+        <a href="#problem-interviews" class="toc-link toc-level-2">Traditional Interview Failures</a>
+        <a href="#problem-leetcode" class="toc-link toc-level-2">The &#34;LeetCode Problem&#34;</a>
+        <a href="#problem-fidelity" class="toc-link toc-level-2">The Fidelity Gap</a>
+
+        <a href="#solutions" class="toc-link">Evidence-Based Solutions</a>
+        <a href="#work-samples" class="toc-link toc-level-2">Work Sample Tests</a>
+        <a href="#role-assessment" class="toc-link toc-level-2">Structured Technical Assessments</a>
+        <a href="#project-based" class="toc-link toc-level-2">Project-Based Assessments</a>
+
+        <a href="#collaborative" class="toc-link">Collaborative Methods</a>
+        <a href="#pair-programming" class="toc-link toc-level-2">Pair Programming Interviews</a>
+        <a href="#code-review" class="toc-link toc-level-2">Real-Time Code Review</a>
+
+        <a href="#implementation" class="toc-link">Implementation Framework</a>
+        <a href="#authentic-design" class="toc-link toc-level-2">Authentic Assessment Design</a>
+        <a href="#evaluation-rubrics" class="toc-link toc-level-2">Structured Evaluation</a>
+        <a href="#process-efficiency" class="toc-link toc-level-2">Process Efficiency</a>
+
+        <a href="#future" class="toc-link">Future Directions</a>
+        <a href="#ai-assessment" class="toc-link toc-level-2">AI-Assisted Tools</a>
+        <a href="#continuous" class="toc-link toc-level-2">Continuous Refinement</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-grid">
+          <div>
+            <h1 class="hero-title serif">Reforming Tech Hiring</h1>
+            <p class="hero-subtitle">Aligning Assessment with Real-World Software Development</p>
+
+            <div class="highlight-box">
+              <p class="font-semibold text-lg mb-2">Key Finding:</p>
+              <p>Work sample tests achieve <strong>predictive validity of ~0.51</strong> versus <strong>0.14 for unstructured interviews</strong>—a 3.6x improvement in hiring accuracy.</p>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <img src="https://kimi-web-img.moonshot.cn/img/wimg.588ku.com/5e28d5a74c95ea694a43e31d2afee3fb78b501e0.gif" alt="Pair programming interview session" class="w-full h-full object-cover rounded-lg" size="medium" aspect="wide" style="photo" query="pair programming interview" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section class="mb-12">
+        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="serif text-xl font-semibold mb-4">Executive Summary</h2>
+          <p class="text-lg leading-relaxed">
+            The contemporary technology hiring landscape is fundamentally compromised by assessment methods that bear little relationship to actual job performance. <strong>Traditional unstructured interviews predict job performance with only 14% accuracy</strong>, while algorithmic puzzles test skills that appear in fewer than 5% of production codebases. This misalignment creates substantial costs: qualified candidates are systematically filtered out, while false positives generate organizational expenses equivalent to <strong>50-200% of annual salary</strong> per mis-hire.
+          </p>
+          <p class="mt-4 text-lg leading-relaxed">
+            The solution lies in <strong>work sample tests</strong> that mirror actual job tasks—debugging real codebases, implementing features in existing systems, and collaborative problem-solving. Organizations implementing authentic assessments have reduced hiring cycles from <strong>2-3 months to under one week</strong> while improving both predictive validity and candidate experience.
+          </p>
+        </div>
+      </section>
+
+      <!-- The Core Problem -->
+      <section id="problem" class="mb-16">
+        <div class="section-header">
+          <h2 class="section-title serif">The Core Problem: Misalignment Between Hiring Practices and Day-to-Day Work</h2>
+        </div>
+
+        <div id="problem-interviews" class="mb-12">
+          <h3 class="subsection-title">Failures of Traditional Interview Methods</h3>
+
+          <h4 class="font-semibold text-lg mb-4">Low Predictive Validity of Unstructured Interviews</h4>
+          <p class="mb-6">
+            Research consistently demonstrates that <strong>traditional unstructured interviews predict job performance with only 14% accuracy</strong>—a figure that approaches random selection and represents a catastrophic failure of organizational decision-making <a href="https://utkrusht.ai/blog/perfect-tech-hiring-process-for-software-development-companies" class="citation">[1]</a>
+            <a href="https://recruiter.daily.dev/resources/technical-hiring-best-practices-2025-what-changed/" class="citation">[2]</a>. This validity crisis translates directly into substantial costs: misallocated recruitment resources, extended vacancy periods, and the cumulative damage of poor hiring decisions.
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value">0.14</div>
+              <div class="text-sm text-gray-600">Validity coefficient for unstructured interviews</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">0.51</div>
+              <div class="text-sm text-gray-600">Validity coefficient for work sample tests</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">3.6x</div>
+              <div class="text-sm text-gray-600">Improvement in prediction accuracy</div>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <p class="font-semibold">Similarity-Attraction Bias:</p>
+            <p>Interviewers unconsciously gravitate toward candidates who mirror their own backgrounds, communication styles, or educational credentials, systematically disadvantaging candidates who may excel in actual development environments but lack interview polish.</p>
+          </div>
+
+          <h4 id="problem-leetcode" class="font-semibold text-lg mb-4 mt-8">The &#34;LeetCode Problem&#34;: Algorithmic Puzzles vs. Actual Development</h4>
+          <p class="mb-6">
+            The widespread adoption of algorithmic puzzle-solving as a primary evaluation mechanism tests skills orthogonal to daily engineering work. Industry analysis indicates that <strong>the specific algorithmic techniques emphasized in these assessments appear in fewer than 5% of production codebases</strong>
+            <a href="https://www.linkedin.com/posts/codingwithroby_leetcode-is-not-real-life-programming-activity-7125436331844915201-mzxX" class="citation">[8]</a>. The overwhelming majority of development work involves reading and modifying existing code, integrating external libraries, making incremental architectural improvements, and collaborating with colleagues.
+          </p>
+
+          <img src="https://kimi-web-img.moonshot.cn/img/substackcdn.com/8af7004710164e07802749ae0e7e80d7c113aed9.png" alt="Professional software engineering team collaboration" class="w-full rounded-lg shadow-sm mb-6" size="large" aspect="wide" style="photo" query="software development team collaboration" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+        </div>
+
+        <div id="problem-fidelity" class="mb-12">
+          <h3 class="subsection-title">The Fidelity Gap: Why Assessment Realism Matters</h3>
+          <p class="mb-6">
+            The systematic neglect of <strong>assessment fidelity</strong>—the degree to which evaluation conditions mirror actual job requirements—creates substantial predictive validity reductions. This fidelity gap manifests across multiple dimensions:
+          </p>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+              <h4 class="font-semibold mb-3">Task Authenticity</h4>
+              <p class="text-sm">Assessment activities should mirror actual work performed in the target role</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+              <h4 class="font-semibold mb-3">Environmental Fidelity</h4>
+              <p class="text-sm">Assessment conditions should replicate professional tools and resources</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+              <h4 class="font-semibold mb-3">Social Context</h4>
+              <p class="text-sm">Collaborative patterns should reflect actual team dynamics</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evidence-Based Solutions -->
+      <section id="solutions" class="mb-16">
+        <div class="section-header">
+          <h2 class="section-title serif">Evidence-Based Solutions: Assessment Methods with Higher Predictive Validity</h2>
+        </div>
+
+        <div id="work-samples" class="mb-12">
+          <h3 class="subsection-title">Work Sample Tests and Job Simulations</h3>
+
+          <h4 class="font-semibold text-lg mb-4">Foundational Research Support</h4>
+          <p class="mb-6">
+            The seminal <strong>Schmidt and Hunter (1998)</strong> meta-analysis established that <strong>work sample tests demonstrate predictive validity coefficients of approximately 0.51 for job performance</strong>, substantially exceeding the 0.14 coefficient for unstructured interviews <a href="https://iprospectcheck.com/how-to-hire-tech-talent/" class="citation">[3]</a>. This validity advantage translates directly into productivity improvements equivalent to tens of thousands of dollars per hire.
+          </p>
+
+          <div class="mermaid-container">
+            <div class="mermaid-controls">
+              <button class="mermaid-control-btn zoom-in" title="放大">
+                <i class="fas fa-search-plus"></i>
+              </button>
+              <button class="mermaid-control-btn zoom-out" title="缩小">
+                <i class="fas fa-search-minus"></i>
+              </button>
+              <button class="mermaid-control-btn reset-zoom" title="重置">
+                <i class="fas fa-expand-arrows-alt"></i>
+              </button>
+              <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+            <div class="mermaid">
+              graph TD
+              A[&#34;Traditional Interviews
+              <br/>0.14 Validity&#34;] --&gt; B[&#34;Work Sample Tests
+              <br/>0.51 Validity&#34;]
+              B --&gt; C[&#34;3.6x Improvement
+              <br/>in Prediction Accuracy&#34;]
+              C --&gt; D[&#34;Reduced Mis-hire Costs
+              <br/>50-200% of Salary&#34;]
+              C --&gt; E[&#34;Faster Hiring Cycles
+              <br/>2-3mo → 1wk&#34;]
+            </div>
+          </div>
+
+          <h4 class="font-semibold text-lg mb-4 mt-8">Implementation in Software Development Contexts</h4>
+          <p class="mb-6">
+            Effective implementation requires candidates to work with existing codebases and realistic development scenarios rather than greenfield problems or abstract puzzles. Key implementation components include:
+          </p>
+
+          <ul class="mb-6 space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+              <span>Tasks derived from actual organizational work products</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+              <span>Access to full development tools and resources</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+              <span>Evaluation beyond functional correctness to code quality</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+              <span>Realistic assessment duration (2-4 hours)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div id="role-assessment" class="mb-12">
+          <h3 class="subsection-title">Structured Technical Assessments by Role Level</h3>
+
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full bg-white rounded-lg shadow-sm border">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">Assessment Type</th>
+                  <th class="px-6 py-4 text-left font-semibold">Typical Validity</th>
+                  <th class="px-6 py-4 text-left font-semibold">Optimal Role Level</th>
+                  <th class="px-6 py-4 text-left font-semibold">Reliability Considerations</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr>
+                  <td class="px-6 py-4 font-medium">Coding Tests (work sample format)</td>
+                  <td class="px-6 py-4">0.45-0.55</td>
+                  <td class="px-6 py-4">Junior/Mid-level developers</td>
+                  <td class="px-6 py-4">High when standardized; lower with take-home tests due to plagiarism risk</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-medium">System Design Interviews</td>
+                  <td class="px-6 py-4">0.55-0.65</td>
+                  <td class="px-6 py-4">Senior engineering roles</td>
+                  <td class="px-6 py-4">Medium; substantially dependent on interviewer calibration</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-medium">Architecture Reviews</td>
+                  <td class="px-6 py-4">0.45-0.60</td>
+                  <td class="px-6 py-4">Staff/Principal engineers</td>
+                  <td class="px-6 py-4">Medium; requires panel alignment on evaluation criteria</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-medium">On-Call Simulations</td>
+                  <td class="px-6 py-4">0.55-0.70</td>
+                  <td class="px-6 py-4">SRE/DevOps positions</td>
+                  <td class="px-6 py-4">High when standardized scenarios and protocols are employed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-gray-600 mb-6">Table 1: Role-Appropriate Assessment Design Framework. Validity coefficients estimated from meta-analytic research and industry studies <a href="https://recruiter.daily.dev/resources/technical-hiring-best-practices-2025-what-changed/" class="citation">[2]</a>.</p>
+        </div>
+
+        <div id="project-based" class="mb-12">
+          <h3 class="subsection-title">Project-Based and Take-Home Assessments</h3>
+
+          <div class="highlight-box">
+            <p class="font-semibold">Temporal Fidelity Advantage:</p>
+            <p>Project-based assessments (4-8 hours) enable authentic problem-solving processes, reduce performance anxiety, and allow assessment of self-directed work behaviors—critical capabilities for remote and hybrid development roles.</p>
+          </div>
+
+          <img src="https://kimi-web-img.moonshot.cn/imagegen/20260215/021771128795109cb1021ee4195f5391b444bb7c7eb4d07768378_0.jpeg" alt="Software developer working on take-home coding assessment" class="w-full rounded-lg shadow-sm mb-6" size="medium" aspect="wide" style="photo" query="software developer working on coding project" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+        </div>
+      </section>
+
+      <!-- Collaborative Methods -->
+      <section id="collaborative" class="mb-16">
+        <div class="section-header">
+          <h2 class="section-title serif">Collaborative and Interactive Assessment Methods</h2>
+        </div>
+
+        <div id="pair-programming" class="mb-12">
+          <h3 class="subsection-title">Pair Programming Interviews</h3>
+
+          <p class="mb-6">
+            Pair programming interviews combine elements of traditional interviews with authentic collaborative work. <strong>Candidate and interviewer work together on realistic coding tasks</strong>, with continuous discussion of approach, trade-offs, and implementation decisions throughout the session.
+          </p>
+
+          <div class="pull-quote serif">
+            &#34;The collaborative structure enables direct observation of how candidates engage with technical problems in social context, revealing competencies invisible in individual assessment formats.&#34;
+          </div>
+
+          <h4 class="font-semibold text-lg mb-4">Skills Evaluated</h4>
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+              <h5 class="font-semibold mb-3">Collaborative Competencies</h5>
+              <ul class="space-y-2 text-sm">
+                <li>• Technical communication</li>
+                <li>• External input integration</li>
+                <li>• Perspective reconciliation</li>
+                <li>• Approach adaptation</li>
+              </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+              <h5 class="font-semibold mb-3">Process Qualities</h5>
+              <ul class="space-y-2 text-sm">
+                <li>• Code explanation clarity</li>
+                <li>• Knowledge articulation</li>
+                <li>• Learning trajectory</li>
+                <li>• Adaptability to feedback</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="code-review" class="mb-12">
+          <h3 class="subsection-title">Real-Time Code Review and Discussion</h3>
+
+          <h4 class="font-semibold text-lg mb-4">BBC Technical Assessment Model</h4>
+          <p class="mb-6">
+            The <strong>BBC&#39;s technical assessment methodology</strong> exemplifies best practice in realistic, collaborative evaluation. Candidates receive codebase access several days in advance, enabling local setup, exploration, and preliminary analysis without artificial time pressure <a href="https://workplace.stackexchange.com/questions/197363/does-anyone-actually-use-leetcode-style-questions-in-interviewing" class="citation">[9]</a>
+            <a href="https://elearningindustry.com/alternative-ways-to-evaluate-candidates-and-attract-top-talent" class="citation">[12]</a>.
+          </p>
+
+          <div class="highlight-box">
+            <p class="font-semibold">Preparation-Enabled Format Benefits:</p>
+            <ul class="mt-2 space-y-1">
+              <li>• Reduces artificial time pressure and performance anxiety</li>
+              <li>• Enables assessment of self-directed learning behaviors</li>
+              <li>• Aligns candidate and evaluator incentives toward genuine capability demonstration</li>
+              <li>• Provides comprehensive assessment across multiple competency domains</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Implementation Framework -->
+      <section id="implementation" class="mb-16">
+        <div class="section-header">
+          <h2 class="section-title serif">Practical Implementation Framework</h2>
+        </div>
+
+        <div id="authentic-design" class="mb-12">
+          <h3 class="subsection-title">Designing Authentic Assessment Experiences</h3>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div>
+              <h4 class="font-semibold text-lg mb-4">Task Selection Criteria</h4>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-code text-blue-600 mt-1 mr-3"></i>
+                  <span>Derived from actual organizational work products</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-layer-group text-green-600 mt-1 mr-3"></i>
+                  <span>Representative of codebase complexity and technology stack</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-expand-arrows-alt text-purple-600 mt-1 mr-3"></i>
+                  <span>Adjustable scope to accommodate candidate level and evaluation depth</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-lg mb-4">Environmental Fidelity</h4>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-book text-orange-600 mt-1 mr-3"></i>
+                  <span>Access to documentation and reference materials</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-tools text-red-600 mt-1 mr-3"></i>
+                  <span>Flexible language and framework selection</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-users text-indigo-600 mt-1 mr-3"></i>
+                  <span>Realistic collaboration patterns</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="evaluation-rubrics" class="mb-12">
+          <h3 class="subsection-title">Structured Evaluation Rubrics</h3>
+
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full bg-white rounded-lg shadow-sm border">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">Competency Domain</th>
+                  <th class="px-6 py-4 text-left font-semibold">Specific Indicators</th>
+                  <th class="px-6 py-4 text-left font-semibold">Evaluation Methods</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr>
+                  <td class="px-6 py-4 font-medium">Problem Decomposition</td>
+                  <td class="px-6 py-4">Requirements clarification; systematic breakdown; risk identification</td>
+                  <td class="px-6 py-4">Observation of planning behavior; discussion of approach rationale</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-medium">Communication and Collaboration</td>
+                  <td class="px-6 py-4">Explanation clarity; active listening; feedback incorporation</td>
+                  <td class="px-6 py-4">Pair programming dynamics; code review discussion; requirement clarification</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-medium">Learning Agility</td>
+                  <td class="px-6 py-4">Resource utilization; adaptation to new information; iterative improvement</td>
+                  <td class="px-6 py-4">Introduction of constraints during assessment; review of revision history</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-gray-600 mb-6">Table 2: Holistic Competency Assessment Framework. Multiple dimensions must be evaluated to predict comprehensive job performance <a href="https://recruiter.daily.dev/resources/technical-hiring-best-practices-2025-what-changed/" class="citation">[2]</a>.</p>
+        </div>
+
+        <div id="process-efficiency" class="mb-12">
+          <h3 class="subsection-title">Process Efficiency Improvements</h3>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value">75%</div>
+              <div class="text-sm text-gray-600">Reduction in candidate screening time (IBM Watson Recruitment)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">2-3mo</div>
+              <div class="text-sm text-gray-600">Traditional hiring cycle duration</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">1wk</div>
+              <div class="text-sm text-gray-600">Compressed hiring cycle with authentic assessments</div>
+            </div>
+          </div>
+
+          <img src="https://kimi-web-img.moonshot.cn/img/corporate-assets.lucid.co/e5e89d018832cb3751ed1cb14824f64d898fb3e8.png" alt="Automated hiring process workflow" class="w-full rounded-lg shadow-sm mb-6" size="medium" aspect="wide" query="automated hiring process workflow" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+        </div>
+      </section>
+
+      <!-- Future Directions -->
+      <section id="future" class="mb-16">
+        <div class="section-header">
+          <h2 class="section-title serif">Emerging Trends and Future Directions</h2>
+        </div>
+
+        <div id="ai-assessment" class="mb-12">
+          <h3 class="subsection-title">AI-Assisted Assessment Tools</h3>
+
+          <h4 class="font-semibold text-lg mb-4">Current Applications</h4>
+          <p class="mb-6">
+            AI-driven platforms have demonstrated substantial efficiency improvements in large-scale recruitment operations. <strong>IBM&#39;s Watson Recruitment system achieved 75% reduction in candidate screening time</strong> while improving retention through AI-powered matching <a href="https://www.sparkhire.com/learn/time-to-hire/the-impact-of-technology-on-your-hiring-process/" class="citation">[5]</a>. <strong>Unilever&#39;s AI-enhanced recruitment platform compressed hiring timelines from four months to two weeks while increasing application diversity by 16%</strong>
+            <a href="https://www.geeksforgeeks.org/blogs/how-technology-is-transforming-the-hiring-process/" class="citation">[4]</a>.
+          </p>
+
+          <div class="highlight-box">
+            <p class="font-semibold">AI Applications in Assessment:</p>
+            <ul class="mt-2 space-y-1">
+              <li>• Automated code analysis for style conformance and complexity metrics</li>
+              <li>• Pattern recognition in problem-solving approaches</li>
+              <li>• Standardized evaluation pipelines for bias reduction</li>
+              <li>• Initial candidate screening and filtering</li>
+            </ul>
+          </div>
+
+          <h4 class="font-semibold text-lg mb-4">Limitations and Human Oversight Requirements</h4>
+          <p class="mb-6">
+            Despite substantial capabilities, AI assessment tools face important limitations. <strong>Critical assessment of collaborative and communication skills remains fundamentally human-led</strong>, as these competencies involve nuanced social interaction that AI cannot currently evaluate validly. The most effective implementations position AI as complementing rather than replacing expert technical judgment <a href="https://workplace.stackexchange.com/questions/197363/does-anyone-actually-use-leetcode-style-questions-in-interviewing" class="citation">[9]</a>.
+          </p>
+        </div>
+
+        <div id="continuous" class="mb-12">
+          <h3 class="subsection-title">Continuous Process Refinement</h3>
+
+          <p class="mb-6">
+            Sustainable improvement in hiring effectiveness requires <strong>systematic tracking of relationships between assessment performance and subsequent job performance</strong>. This outcome validation enables identification of assessment components that genuinely predict success and elimination of elements that add noise without validity contribution.
+          </p>
+
+          <div class="pull-quote serif">
+            &#34;Even modest validity improvements translate into significant productivity gains given the cumulative impact of selection decisions across large hiring volumes.&#34;
+          </div>
+
+          <p class="mt-6">
+            The ultimate vision is an <strong>industry-wide elevation of hiring practice</strong>, where realistic, valid assessment becomes the norm rather than competitive differentiator. This transformation requires sustained commitment from leading organizations, transparent sharing of outcomes data, and collective rejection of assessment methods demonstrated to be invalid.
+          </p>
+        </div>
+      </section>
+
+      <!-- Conclusion -->
+      <section class="mb-16">
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-8">
+          <h2 class="serif text-2xl font-bold mb-6">The Path Forward</h2>
+          <p class="text-lg mb-4">
+            The evidence is unequivocal: <strong>work sample tests and authentic assessment methods deliver superior predictive validity while reducing time-to-hire and improving candidate experience</strong>. Organizations continuing to rely primarily on unstructured interviews and algorithmic puzzles are not merely following tradition—they are actively selecting less predictive methods when superior alternatives exist and have been validated through rigorous research.
+          </p>
+          <p class="text-lg">
+            The transition to authentic assessment requires organizational commitment, but the returns are substantial and measurable. <strong>Reforming tech hiring is not just about finding better talent—it&#39;s about aligning organizational practices with the reality of how software development actually works</strong>.
+          </p>
+        </div>
+      </section>
+
+      <!-- References -->
+      <section class="mb-16">
+        <h2 class="serif text-xl font-semibold mb-6">References</h2>
+        <div class="space-y-3 text-sm">
+          <p>[1] <a href="https://utkrusht.ai/blog/perfect-tech-hiring-process-for-software-development-companies" class="citation">Perfect Tech Hiring Process for Software Development Companies</a>
+          </p>
+          <p>[2] <a href="https://recruiter.daily.dev/resources/technical-hiring-best-practices-2025-what-changed/" class="citation">Technical Hiring Best Practices 2025: What Changed?</a>
+          </p>
+          <p>[3] <a href="https://iprospectcheck.com/how-to-hire-tech-talent/" class="citation">How to Hire Tech Talent</a>
+          </p>
+          <p>[4] <a href="https://www.geeksforgeeks.org/blogs/how-technology-is-transforming-the-hiring-process/" class="citation">How Technology is Transforming the Hiring Process</a>
+          </p>
+          <p>[5] <a href="https://www.sparkhire.com/learn/time-to-hire/the-impact-of-technology-on-your-hiring-process/" class="citation">The Impact of Technology on Your Hiring Process</a>
+          </p>
+          <p>[6] <a href="https://www.linkedin.com/posts/atifmansoor_leetcode-vs-real-world-coding-challenges-activity-7317271360706072576-3lfU" class="citation">LeetCode vs Real World Coding Challenges</a>
+          </p>
+          <p>[7] <a href="https://melvinoostendorp.nl/blog/leetcode-interviews" class="citation">LeetCode Interviews</a>
+          </p>
+          <p>[8] <a href="https://www.linkedin.com/posts/codingwithroby_leetcode-is-not-real-life-programming-activity-7125436331844915201-mzxX" class="citation">LeetCode is Not Real Life Programming</a>
+          </p>
+          <p>[9] <a href="https://workplace.stackexchange.com/questions/197363/does-anyone-actually-use-leetcode-style-questions-in-interviewing" class="citation">Does Anyone Actually Use LeetCode Style Questions in Interviewing?</a>
+          </p>
+          <p>[10] <a href="https://www.jobaccess.gov.au/sites/default/files/documents/2025-03/8036-alternative-ways-assess.pdf" class="citation">Alternative Ways to Assess</a>
+          </p>
+          <p>[11] <a href="https://www.sweeeft.ai/en/articles/the-best-assessment-techniques-in-recruitment-identifying-the-talent-that-will-drive-your-company-forward-112" class="citation">The Best Assessment Techniques in Recruitment</a>
+          </p>
+          <p>[12] <a href="https://elearningindustry.com/alternative-ways-to-evaluate-candidates-and-attract-top-talent" class="citation">Alternative Ways to Evaluate Candidates and Attract Top Talent</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Mobile TOC Toggle -->
+    <button id="tocToggle" class="fixed top-4 left-4 z-50 lg:hidden bg-white p-3 rounded-lg shadow-lg">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <script>
+        // Initialize Mermaid with enhanced theme and contrast
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#fef3c7',
+                primaryTextColor: '#92400e',
+                primaryBorderColor: '#d97706',
+                lineColor: '#374151',
+                secondaryColor: '#f8fafc',
+                tertiaryColor: '#fed7aa',
+                background: '#ffffff',
+                mainBkg: '#fef3c7',
+                secondBkg: '#f8fafc',
+                tertiaryBkg: '#fed7aa',
+                nodeBorder: '#d97706',
+                clusterBkg: '#f8fafc',
+                edgeLabelBackground: '#ffffff',
+                nodeTextColor: '#374151'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            },
+            fontSize: 14,
+            fontFamily: 'Inter, sans-serif'
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
+        }
+
+        // Initialize mermaid controls after DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeMermaidControls();
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+
+                    // Update active link
+                    document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Update active TOC link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const link = document.querySelector(`.toc-link[href="#${section.id}"]`);
+
+                if (scrollPos >= top && scrollPos <= bottom) {
+                    document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+                    if (link) link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile TOC toggle
+        document.getElementById('tocToggle').addEventListener('click', function() {
+            document.querySelector('.toc-sidebar').classList.toggle('open');
+        });
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sidebar = document.querySelector('.toc-sidebar');
+            const toggle = document.getElementById('tocToggle');
+
+            if (window.innerWidth <= 1024 &&
+                !sidebar.contains(e.target) &&
+                !toggle.contains(e.target) &&
+                sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>

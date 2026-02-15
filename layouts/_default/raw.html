@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    {{ range .Params.rawJS }}
+    <script src="{{ . }}"></script>
+    {{ end }}
+    {{ range .Params.rawFonts }}
+    <link href="{{ . }}" rel="stylesheet">
+    {{ end }}
+    {{ range .Params.rawCSS }}
+    <link rel="stylesheet" href="{{ . }}">
+    {{ end }}
+    {{ if .Params.rawBaseTarget }}
+    <base target="{{ .Params.rawBaseTarget }}">
+    {{ end }}
+</head>
+<body{{ with .Params.bodyClass }} class="{{ . }}"{{ end }}>
+    {{ .Content }}
+</body>
+</html>
